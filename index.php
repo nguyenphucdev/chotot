@@ -4,33 +4,55 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Test</title>
     	<link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <script src="js/jquery-1.9.1.min.js"></script>
+      	<script src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.dragsort.js"></script>
         <script src="js/scripts.js"></script>
 <script type="text/javascript">
-    var loadspeed=100;
-	var scrolltop=500;
-	var imageArr=new Array();
-	var inval=0;
-	$(document).ready(function () {
-		$('#loading-image').show();
-		$.ajax({
-    		type: "POST",
-   			url: 'function.php',
-    		dataType: 'json',
-    		data: { loadimage: "true"},
-    		success: function (data) {
-             imageArr = data;  
-             $('#loading-image').hide(500);
-             jqueryfall_down();
-         	}
-		});
+	var speed=500;
+	var state = false;
+	$('#loading-image').show();
+	$(document).ready(function () {		
+		jqueryfall_down();	
 	});
+								
 </script>
 </head>
-<body>   	
-<div id="root" class="background">
-<div id="loading-image"></div>
-<div id="image_wrapper"></div>
-</div>
+
+<body id="body">
+		
+
+	<div id="control-section">
+		<div id='loading-image'></div>
+			 <span style="font-size: 0.5em;">&copy; nguyenphucdev@gmail.com</span>
+			 
+			 <button id="stopbtn">STOP</button>
+			  <button id="runbtn">RUN</button>
+		</div>
+	<div id="main-content">
+	
+	</div>
+<script type="text/javascript">
+$( "#runbtn" ).toggle();
+$( "#stopbtn" ).on( "click", function() {
+	$( "#stopbtn" ).hide();
+	$( "#runbtn" ).show();
+  	state=true;
+ 
+  	
+});
+
+$( "#runbtn" ).on( "click", function() {
+	$( "#stopbtn" ).show();
+	$( "#runbtn" ).hide();
+  	state=false;
+  	var speed=$("select[name=speed]").val();
+  	jqueryfall_down();	
+  	
+});
+
+
+</script>
+
+
 </body>
 </html>
